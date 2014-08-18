@@ -1,0 +1,7 @@
+[user]
+	email = lg2841@163.com
+	name = Liu Gang
+[push]
+	default = simple
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit --
