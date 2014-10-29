@@ -1,0 +1,17 @@
+#! /bin/sh
+
+###############################################################################
+## remove white point on the loging screen
+#xhost +SI:localuser:lightdm
+#su lightdm -s /bin/bash
+
+
+###############################################################################
+## remove guest on the loging screen
+if test -e /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+then
+	echo allow-guest=false >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+else
+	echo allow-guest=false > /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+fi
+	
