@@ -12,5 +12,9 @@ apt-get -y install classicmenu-indicator
 apt-get -y install vim
 apt-get -y install evince
 apt-get -y install openssh-client
+apt-get -y install filezilla
 apt-get -y install tftp
 apt-get -y install tftpd
+apt-get -y install isc-dhcp-server
+apt-get -y virtualbox
+apt-get -y flashplugin-installer

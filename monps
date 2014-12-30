@@ -1,0 +1,48 @@
+#!/bin/bash
+# this is a simple process monitor script
+# version: 1
+
+
+###############################################################################
+## environment set up
+# process name which is going to be monitored
+psname=gedit
+
+# monitor frequency
+interval=1
+
+# log file to record restart history
+logfile=~/monps.log
+
+# enable(1) or disable(0) debug
+debug=1
+
+
+###############################################################################
+## program start
+if [ -e $logfile ]
+then
+	rm -rf $logfile
+fi
+
+
+while true;
+do
+	if [ -n "`ps ax|grep $psname|grep -v grep`" ]
+	then
+		if [ $debug -eq 1 ]
+		then
+			echo process found	
+		fi
+
+		sleep $interval
+	else
+		if [ $debug -eq 1 ]
+		then
+			echo process not found, restarting...
+		fi
+
+		$psname &
+		date >> $logfile
+	fi
+done
