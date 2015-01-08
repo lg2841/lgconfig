@@ -5,7 +5,7 @@
 	default = simple
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit --
-	gs = status
+	st = status
 	cm = commit -m 
 [diff]
 	tool = bc3
