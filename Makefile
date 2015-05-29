@@ -4,27 +4,27 @@ all:exports gitconfig init_setup minirc.dfl monps rm_guest sudoers tftp vimrc zs
 #####################################################################
 # dotfiles
 gitconfig:
-	rm ~/.gitconfig
+	rm -f ~/.gitconfig
 	ln -s ~/working/repos/lgconfig/dotfiles/gitconfig ~/.gitconfig
 	echo **** created link file ~/.gitconfig ****
 
 minirc.dfl:
-	rm ~/.minirc.dfl
+	rm -f ~/.minirc.dfl
 	ln -s ~/working/repos/lgconfig/dotfiles/minirc.dfl ~/.minirc.dfl
 	echo **** created link file ~/.minirc.dfl ****
 
 tmux:
-	rm ~/.tmux.conf
+	rm -f ~/.tmux.conf
 	ln -s ~/working/repos/lgconfig/dotfiles/tmux.conf ~/.tmux.conf
 	echo **** created link file ~/.tmux.conf ****
 
 vimrc:
-	rm ~/.vimrc
+	rm -f ~/.vimrc
 	ln -s ~/working/repos/lgconfig/dotfiles/vimrc ~/.vimrc
 	echo **** created link file ~/.vimrc ****
 
 zshrc:
-	rm ~/.zshrc
+	rm -f ~/.zshrc
 	ln -s ~/working/repos/lgconfig/dotfiles/zshrc ~/.zshrc
 	echo **** created link file ~/.zshrc ****
 
