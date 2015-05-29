@@ -6,28 +6,33 @@ all:exports gitconfig init_setup minirc.dfl monps rm_guest sudoers tftp vimrc zs
 gitconfig:
 	rm -f ~/.gitconfig
 	ln -s ~/working/repos/lgconfig/dotfiles/gitconfig ~/.gitconfig
-	echo **** created link file ~/.gitconfig ****
+	echo **** created link file ~/.gitconfig
 
 minirc.dfl:
 	rm -f ~/.minirc.dfl
 	ln -s ~/working/repos/lgconfig/dotfiles/minirc.dfl ~/.minirc.dfl
-	echo **** created link file ~/.minirc.dfl ****
+	echo **** created link file ~/.minirc.dfl
 
 tmux:
 	rm -f ~/.tmux.conf
 	ln -s ~/working/repos/lgconfig/dotfiles/tmux.conf ~/.tmux.conf
 	git clone https://github.com/tmuxinator/tmuxinator.git ~/working/repos/tmuxinator
-	echo **** created link file ~/.tmux.conf ****
+	echo **** created link file ~/.tmux.conf
 
 vimrc:
 	rm -f ~/.vimrc
 	ln -s ~/working/repos/lgconfig/dotfiles/vimrc ~/.vimrc
-	echo **** created link file ~/.vimrc ****
+	echo **** created link file ~/.vimrc
 
 zshrc:
 	rm -f ~/.zshrc
 	ln -s ~/working/repos/lgconfig/dotfiles/zshrc ~/.zshrc
-	echo **** created link file ~/.zshrc ****
+	echo **** created link file ~/.zshrc
+
+ssh:
+	rm -rf ~/.ssh
+	ln -s ~/working/repos/lgconfig/dotfiles/ssh ~/.ssh
+	echo **** created link file ~/.ssh
 
 
 #####################################################################

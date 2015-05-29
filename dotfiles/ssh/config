@@ -1,0 +1,15 @@
+
+host tb
+        user lg2841
+        identityfile ~/.ssh/tbea-mon
+	hostname 172.24.105.209
+
+host tb-git
+        user liugang
+        identityfile ~/.ssh/tbea-git
+	hostname 172.24.105.209
+
+host ln
+        user root
+        identityfile ~/.ssh/linode
+	hostname 106.187.53.112
