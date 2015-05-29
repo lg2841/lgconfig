@@ -16,6 +16,7 @@ minirc.dfl:
 tmux:
 	rm -f ~/.tmux.conf
 	ln -s ~/working/repos/lgconfig/dotfiles/tmux.conf ~/.tmux.conf
+	git clone https://github.com/tmuxinator/tmuxinator.git ~/working/repos/tmuxinator
 	echo **** created link file ~/.tmux.conf ****
 
 vimrc:
