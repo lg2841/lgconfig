@@ -19,6 +19,7 @@ set nobackup
 set hlsearch
 set incsearch
 set ignorecase
+set cursorline
 syntax on
 
 
