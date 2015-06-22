@@ -29,6 +29,7 @@ vimrc:
 zshrc:
 	rm -f ~/.zshrc
 	ln -s ~/working/repos/lgconfig/dotfiles/zshrc ~/.zshrc
+	git clone https://github.com/rimraf/k.git ~/.oh-my-zsh/plugins/k
 	echo **** created link file ~/.zshrc
 
 ssh:

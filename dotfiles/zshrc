@@ -59,6 +59,7 @@ source $ZSH/oh-my-zsh.sh
 export REPOS=http://172.24.105.209/repos
 export EDITOR='vim'
 source ~/working/repos/tmuxinator/completion/tmuxinator.zsh
+source ~/.oh-my-zsh/plugins/k/k.sh
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
