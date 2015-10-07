@@ -1,34 +1,36 @@
 
-all:exports gitconfig init_setup minirc.dfl monps rm_guest sudoers tftp vimrc zshrc
+
+
+all:exports gitconfig init_setup minicom monps rm_guest sudoers tftp vimrc zsh
 
 #####################################################################
 # dotfiles
 gitconfig:
 	rm -f ~/.gitconfig
-	ln -s ~/working/repos/lgconfig/dotfiles/gitconfig ~/.gitconfig
+	ln -s ~/steel/working/repos/lgconfig/dotfiles/gitconfig ~/.gitconfig
 	echo **** created link file ~/.gitconfig
 
-minirc.dfl:
+minicom:
 	rm -f ~/.minirc.dfl
-	ln -s ~/working/repos/lgconfig/dotfiles/minirc.dfl ~/.minirc.dfl
+	ln -s ~/steel/working/repos/lgconfig/dotfiles/minirc.dfl ~/.minirc.dfl
 	echo **** created link file ~/.minirc.dfl
 
 tmux:
 	rm -f ~/.tmux.conf
-	ln -s ~/working/repos/lgconfig/dotfiles/tmux.conf ~/.tmux.conf
-	git clone https://github.com/tmuxinator/tmuxinator.git ~/working/repos/tmuxinator
+	ln -s ~/steel/working/repos/lgconfig/dotfiles/tmux.conf ~/.tmux.conf
+	#git clone https://github.com/tmuxinator/tmuxinator.git ~/steel/working/repos/tmuxinator
 	sudo apt-get install rubygems-integration
-	sudo gem tmuxinator
+	sudo gem install tmuxinator
 	echo **** install tmuxinator and create link file ~/.tmux.conf
 
-vimrc:
+vim:
 	rm -f ~/.vimrc
 	ln -s ~/working/repos/lgconfig/dotfiles/vimrc ~/.vimrc
 	echo **** created link file ~/.vimrc
 
-zshrc:
+zsh:
 	rm -f ~/.zshrc
-	ln -s ~/working/repos/lgconfig/dotfiles/zshrc ~/.zshrc
+	ln -s ~/steel/working/repos/lgconfig/dotfiles/zshrc ~/.zshrc
 	git clone https://github.com/rimraf/k.git ~/.oh-my-zsh/plugins/k
 	echo **** created link file ~/.zshrc
 

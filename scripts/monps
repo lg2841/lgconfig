@@ -1,6 +1,6 @@
 #!/bin/bash
 # this is a simple process monitor script
-# version: 1
+# version: 2
 
 
 ###############################################################################
@@ -17,13 +17,13 @@ logfile=~/monps.log
 # enable(1) or disable(0) debug
 debug=1
 
+echo "" $logfile
+echo "*************************************************" >> $logfile
+echo "** start monps to monitor **" >> $logfile
+date >> $logfile
 
 ###############################################################################
 ## program start
-if [ -e $logfile ]
-then
-	rm -rf $logfile
-fi
 
 
 while true;
@@ -46,3 +46,4 @@ do
 		date >> $logfile
 	fi
 done
+

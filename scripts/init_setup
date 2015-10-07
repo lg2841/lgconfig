@@ -1,6 +1,10 @@
 #! /bin/sh
 
 apt-get -y install minicom
+apt-get -y install curl
+apt-get -y install autojump
+apt-get -y install zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 apt-get -y install terminator
 apt-get -y install git
 apt-get -y install qgit
@@ -9,6 +13,7 @@ apt-get -y install nfs-common
 apt-get -y install nfs-kernel-server
 apt-get -y install filezilla
 apt-get -y install classicmenu-indicator
+apt-get -y indicator-multiload
 apt-get -y install vim
 apt-get -y install evince
 apt-get -y install openssh-client
@@ -18,3 +23,4 @@ apt-get -y install tftpd
 apt-get -y install isc-dhcp-server
 apt-get -y virtualbox
 apt-get -y flashplugin-installer
+
