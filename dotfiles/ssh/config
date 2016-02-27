@@ -4,9 +4,21 @@ Host ly
     User            freelion
     IdentityFile    ~/.ssh/id_rsa
 
-Host lyroot
+Host lyr
     HostName        www.ly-sys.com
     Port            22
+    User            root
+    IdentityFile    ~/.ssh/id_rsa
+
+Host bwg
+    HostName        45.78.43.23
+    Port            26247
+    User            freelion
+    IdentityFile    ~/.ssh/id_rsa
+
+Host bwgr
+    HostName        45.78.43.23
+    Port            26247
     User            root
     IdentityFile    ~/.ssh/id_rsa
 

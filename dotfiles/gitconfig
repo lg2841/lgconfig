@@ -9,6 +9,8 @@
 	prompt = false
 [merge]
 	tool = bc3
+[mergetool]
+	prompt = false
 [mergetool "bc3"]
 	trustExitCode = true
 [alias]
