@@ -5,7 +5,7 @@ Host ly
     IdentityFile    ~/.ssh/id_rsa
 
 Host lyr
-    HostName        www.ly-sys.com
+    HostName        git.ly-sys.com
     Port            22
     User            root
     IdentityFile    ~/.ssh/id_rsa
@@ -17,8 +17,14 @@ Host bwg
     IdentityFile    ~/.ssh/id_rsa
 
 Host bwgr
-    HostName        45.78.43.23
-    Port            26247
+    HostName        23.105.215.249
+    Port            28822
     User            root
     IdentityFile    ~/.ssh/id_rsa
 
+
+Host git
+    HostName        104.128.87.87
+    Port            28812
+    User            root
+    IdentityFile    ~/.ssh/id_rsa

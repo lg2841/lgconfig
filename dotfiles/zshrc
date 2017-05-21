@@ -49,7 +49,7 @@ plugins=(git autojump tmux tmuxinator)
 
 # User configuration
 
-export PATH=$HOME/steel/install/bc3/bin/:$HOME/install/arduino-1.6.5:$HOME/bin:/usr/local/bin:$HOME/steel/working/tbea/u-boot/tools/:$PATH
+export PATH=$HOME/steel/working/uav/px4/toolchain/bin:$HOME/steel/install/bc3/bin/:$HOME/install/arduino-1.6.5:$HOME/bin:/usr/local/bin:$HOME/steel/working/tbea/u-boot/tools/:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -58,6 +58,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 export REPOS=http://172.24.105.209/repos
 export EDITOR='vim'
+export NFS_BOOT=~/steel/working/tbea/buildroot/output/rootfs/boot/
 source ~/steel/working/repos/tmuxinator/completion/tmuxinator.zsh
 source ~/.oh-my-zsh/plugins/k/k.sh
 
@@ -91,5 +92,7 @@ alias cscope='/home/steel/steel/install/ise/14.7/LabTools/LabTools/bin/lin64/ana
 alias ise='/home/steel/steel/install/ise/14.7/ISE_DS/ISE/bin/lin64/ise
 
 alias cpm='cp -f ~/steel/working/tbea/zlg3352/drivers/gpmc/ext_mem.ko /media/steel/MYBOOT/waverec/'
-alias cpa='cp -f ~/steel/working/tbea/apps/waverec/bin/waverec /media/steel/MYBOOT/waverec/; cp -f ~/steel/working/tbea/zlg3352/drivers/gpmc/fpga_mem.ko /media/steel/MYBOOT/waverec/'
+#alias cpa='cp -f ~/steel/working/tbea/apps/waverec/bin/waverec /media/steel/2C04-61BB/waverec/; cp -f ~/steel/working/tbea/zlg3352/drivers/gpmc/fpga_mem.ko /media/steel/2C04-61BB/waverec/'
+alias cpa='cp -f ~/steel/working/tbea/apps/waverec/bin/waverec /media/steel/0012-D687/waverec/; cp -f ~/steel/working/tbea/zlg3352/drivers/gpmc/fpga_mem.ko /media/steel/0012-D687/waverec/'
+alias cng='cd /media/steel/WORK/steel/working/lingying/new_git/'
 

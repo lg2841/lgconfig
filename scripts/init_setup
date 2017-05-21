@@ -23,4 +23,5 @@ apt-get -y install tftpd
 apt-get -y install isc-dhcp-server
 apt-get -y virtualbox
 apt-get -y flashplugin-installer
+apt-get -y bless
 
