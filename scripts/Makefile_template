@@ -1,0 +1,106 @@
+
+.PHONY = all install clean
+
+#target name
+TARGETMAIN	= dfti_srv
+TARGETLIB	= libmt.a
+TARGETDLL	= libmt.so
+INSTALL_DIR     = /media/steel/MYBOOT/waverec
+
+# local compile
+CROSS_COMPILE := 
+#CFLAGS	+= --sysroot=/home/liugang/working/tbea/buildroot/output/host/usr/arm-buildroot-linux-gnueabi/sysroot -march=armv7-a -marm -mthumb-interwork -mfpu=neon -mtune=cortex-a8
+#LDFLAGS = -lpthread
+#CPPFLAGS = 
+
+# cross compile ( buildroot toolchain )
+#CROSS_COMPILE:=/home/steel/steel/working/tbea/buildroot/output/host/usr/bin/arm-lingying-linux-gnueabihf-
+#CFLAGS= -march=armv7-a -marm -mthumb-interwork -mfloat-abi=hard -mfpu=neon -mtune=cortex-a8
+
+
+
+#########################################################################################
+##=======================================================================================
+#global directory defined
+TOPDIR       = $(shell pwd)
+SRCDIR	     = $(TOPDIR)/src
+LIBDIR       = $(TOPDIR)/lib
+OBJECTDIR    = $(TOPDIR)/build
+INCLUDEDIR   = $(TOPDIR)/include
+
+
+#cross compile tools defined 
+AS      = $(CROSS_COMPILE)as
+LD      = $(CROSS_COMPILE)ld
+CC      = $(CROSS_COMPILE)gcc
+CXX     = $(CROSS_COMPILE)g++
+AR      = $(CROSS_COMPILE)ar
+NM      = $(CROSS_COMPILE)nm
+STRIP   = $(CROSS_COMPILE)strip
+RANLIB 	= $(CROSS_COMPILE)ranlib
+
+
+#local host tools defined
+CP	:= cp
+RM	:= rm
+MKDIR	:= mkdir
+SED	:= sed
+FIND	:= find
+MKDIR	:= mkdir
+XARGS	:= xargs
+
+#FILE' INFOMATION COLLECT
+VPATH 		= $(shell ls -AxR $(SRCDIR)|grep ":"|grep -v "\.svn"|tr -d ':')
+SOURCEDIRS	= $(VPATH)
+
+#search source file in the current dir
+SOURCES_T  	= $(foreach subdir,$(SOURCEDIRS),$(wildcard $(subdir)/*.c))
+SOURCES         = $(SOURCES_T)  $(foreach subdir,$(SOURCEDIRS),$(wildcard $(subdir)/*.cpp))
+SRCOBJS_T 	= $(patsubst %.c,%.o,$(SOURCES))
+SRCOBJS         = $(patsubst %.cpp,%.o,$(SRCOBJS_T))
+BUILDOBJS       = $(subst $(SRCDIR),$(OBJECTDIR),$(SRCOBJS))
+DEPS		= $(patsubst %.o,%.d,$(BUILDOBJS))
+
+
+#default options
+CFLAGS	   += -O2 -Wall -MD $(foreach dir,$(INCLUDEDIR),-I$(dir))
+CPPFLAGS   += -O2 -Wall -MD $(foreach dir,$(INCLUDEDIR),-I$(dir))
+ARFLAGS     = rc
+
+#c file compile parameters and linked libraries
+XLDFLAGS    = -Xlinker "-(" $(LDFLAGS) -Xlinker "-)"
+LDLIBS	   += -L $(LIBDIR) 
+
+
+#defaut target:compile the currrent dir file and sub dir 
+all:  $(TARGETMAIN)
+
+#for .h header files dependence
+-include $(DEPS)
+
+$(TARGETMAIN) :$(BUILDOBJS)
+	@$(CXX) $(subst $(SRCDIR),$(OBJECTDIR),$^) $(CPPFLAGS) $(CFLAGS) $(XLDFLAGS) -o ./bin/$@ $(LDLIBS) 
+	@$(STRIP)  --strip-unneeded ./bin/$(TARGETMAIN)
+
+$(TARGETLIB) :$(BUILDOBJS)
+	@$(AR) $(ARFLAGS) $@ $(BUILDOBJS)
+	@$(RANLIB) $@
+
+$(TARGETDLL) :$(BUILDOBJS)
+	@$(CC) -shared $(subst $(SRCDIR),$(OBJECTDIR),$^) $(CPPFLAGS) $(CFLAGS) $(XLDFLAGS) -o $@ $(LDLIBS)
+
+$(OBJECTDIR)%.o: $(SRCDIR)%.c
+	@[ ! -d $(dir $(subst $(SRCDIR),$(OBJECTDIR),$@)) ] & $(MKDIR) -p $(dir $(subst $(SRCDIR),$(OBJECTDIR),$@))
+	@$(CC)  $(CFLAGS)   -o $(subst $(SRCDIR),$(OBJECTDIR),$@) -c $<
+
+$(OBJECTDIR)%.o: $(SRCDIR)%.cpp
+	@[ ! -d $(dir $(subst $(SRCDIR),$(OBJECTDIR),$@)) ] & $(MKDIR) -p $(dir $(subst $(SRCDIR),$(OBJECTDIR),$@))
+	@$(CXX) $(CPPFLAGS) -o $(subst $(SRCDIR),$(OBJECTDIR),$@) -c $<
+
+install:
+	sudo cp -f ./bin/$(TARGETMAIN) $(INSTALL_DIR)/
+
+clean:
+	@$(FIND) $(OBJECTDIR) -name "*.o" -o -name "*.d" | $(XARGS) $(RM) -f
+	@$(RM) -f ./bin/$(TARGETMAIN) $(TARGETLIB) $(TARGETDLL)
+
