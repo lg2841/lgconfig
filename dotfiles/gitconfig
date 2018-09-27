@@ -1,14 +1,14 @@
 [user]
 	email = steel@ly-sys.com
-	name = LiuGang
+	name = lg2841
 [push]
 	default = simple
 [diff]
-	tool = bc3
+	tool = meld
 [difftool]
 	prompt = false
 [merge]
-	tool = bc3
+	tool = meld
 [mergetool]
 	prompt = false
 [mergetool "bc3"]

@@ -49,7 +49,7 @@ plugins=(git autojump tmux tmuxinator)
 
 # User configuration
 
-export PATH=$HOME/steel/working/uav/px4/toolchain/bin:$HOME/steel/install/bc3/bin/:$HOME/install/arduino-1.6.5:$HOME/bin:/usr/local/bin:$HOME/steel/working/tbea/u-boot/tools/:$PATH
+export PATH=$HOME/steel/install/nvim:$HOME/steel/working/uav/px4/toolchain/bin:$HOME/steel/install/bc3/bin/:$HOME/install/arduino-1.6.5:$HOME/bin:/usr/local/bin:$HOME/steel/working/tbea/u-boot/tools/:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh

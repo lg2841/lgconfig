@@ -1,30 +1,305 @@
-
 set nocompatible
+
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,chinese,cp936
+source $VIMRUNTIME/delmenu.vim			" for gvim chinese menu
+source $VIMRUNTIME/menu.vim
+
+if has('win32')
+"	source $VIMRUNTIME/vimrc_example.vim
+"	source $VIMRUNTIME/mswin.vim
+"	behave mswin
+autocmd GUIEnter * simalt ~x				" let the gvim max
+endif
+
+"set autoindent		" always set autoindenting on
+"set textwidth=0		" disable add new line automatically
+"set lines=60			" the init window width and hight
+"set columns=180
+set showmode
+set nowrapscan
+set sidescroll=10
+set whichwrap=b,s,<,>
+"set list		" show table symbol
+set listchars=tab:>-,trail:-
+set iskeyword+=-
+set shiftwidth=8
+set showmatch
+set matchtime=15	" the unit is 0.1s
+set cursorline
+set hlsearch
+set ignorecase
+set incsearch
+set number
+set numberwidth=8
+set rnu
+set nobackup
+set nowrap
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+set guioptions-=T	" no display toolbar
+" set foldmethod=indent
+set nofoldenable
+set foldmethod=syntax
+filetype plugin indent on
+syntax on
+colorscheme desert
+
+call plug#begin('~/.vim/plugged')
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'Chiel92/vim-autoformat'
+Plug 'haya14busa/incsearch.vim'
+Plug 'godlygeek/tabular'
+Plug 'scrooloose/nerdtree'
+Plug 'Yggdroot/LeaderF'
+Plug 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'jiangmiao/auto-pairs'
+Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'kshenoy/vim-signature'
+Plug 'luochen1990/rainbow'
+Plug 'dyng/ctrlsf.vim'
+Plug 'inkarkat/vim-mark'
+Plug 'inkarkat/vim-ingo-library'
+Plug 'kana/vim-operator-user'
+Plug 'rhysd/vim-clang-format'
+call plug#end()
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " remeber the position of last exit
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("autocmd")
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
      \| exe "normal g'\"" | endif
 endif
 
-"source $VIMRUNTIME/vimrc_example.vim
-"source $VIMRUNTIME/mswin.vim
-"behave mswin
-set encoding=utf-8
-set fileencodings=utf-8,gbk
+"autocmd BufWritePost $VIM/_vimrc source $VIM/_vimrc	" reload vimrc automaticcaly
 
-colorscheme desert
-filetype plugin on
-set number
-set nobackup
-set hlsearch
-set incsearch
-set ignorecase
-set cursorline
-syntax on
 
-call plug#begin('~/.vim/plugged')
-Plug 'Valloric/YouCompleteMe'
-Plug 'haya14busa/incsearch.vim'
-Plug 'godlygeed/tabular'
-call plug#end()
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERD tree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDChristmasTree=0
+let NERDTreeWinSize=35
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let NERDTreeShowBookmarks=1
+let NERDTreeWinPos="left"
+autocmd vimenter * if !argc() | NERDTree | endif	" Automatically open a NERDTree if no files where specified
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif	" Close vim if the only window left open is a NERDTree
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERD commenter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:NERDSpaceDelims = 1
+let g:NERDAltDelims_c = 0
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" start to use a different leader
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tabular
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = ","
+map <Leader>=  <Esc>:Tab /=<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tagbar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:tagbar_compact=1
+let g:tagbar_width = 30
+nmap <C-t> <Esc>:TagbarToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-indent-guides
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:indent_guides_enable_on_vim_startup=1		" start with vim
+" let g:indent_guides_start_level=2			" from the 2nd level
+" let g:indent_guides_guide_size=0
+"nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" auto-pair
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:AutoPairsFlyMode = 0
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" yankstack
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" rainbow
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:rainbow_active = 1 
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ctrlsf
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" autoformat
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:formatterpath = ['D:\steel\software\green\totalcmd\tools\astyle\bin\']
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Clang-format
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"	 AlwaysBreakTemplateDeclarations : No,
+"	 CommentPragmas
+"	 DisableFormat
+"	 ExperimentalAutoDetectBinPacking
+"	 IncludeCategories
+"	 IncludeIsMainRegex
+"	BreakInheritanceList
+"	MacroBlockBegin
+"	MacroBlockEnd
+"	RawStringFormats
+"	SpaceBeforeCtorInitializerColon
+"	SpaceBeforeCpp11BracedList
+"	SpacesBeforeTrailingComments
+"	SpaceBeforeRangeBasedForLoopColon
+let g:clang_format#command = 'D:\steel\software\green\totalcmd\tools\astyle\bin\clang-format.exe'
+let g:clang_format#style_options = {
+	\ "BasedOnStyle"                              : "Google",
+	\ "AccessModifierOffset"                      : "0",
+	\ "AlignAfterOpenBracket"                     : "Align",
+	\ "AlignConsecutiveAssignments"               : "true",
+	\ "AlignConsecutiveDeclarations"              : "true",
+	\ "AlignEscapedNewlines"                      : "Left",
+	\ "AlignOperands"                             : "true",
+	\ "AlignTrailingComments"                     : "true",
+	\ "AllowAllParametersOfDeclarationOnNextLine" : "true",
+	\ "AllowShortBlocksOnASingleLine"             : "false",
+	\ "AllowShortCaseLabelsOnASingleLine"         : "false",
+	\ "AllowShortFunctionsOnASingleLine"          : "None",
+	\ "AllowShortIfStatementsOnASingleLine"       : "false",
+	\ "AllowShortLoopsOnASingleLine"              : "false",
+	\ "AlwaysBreakAfterDefinitionReturnType"      : "None",
+	\ "AlwaysBreakAfterReturnType"                : "None",
+	\ "AlwaysBreakBeforeMultilineStrings"         : "false",
+	\ "BinPackArguments"                          : "true",
+	\ "BinPackParameters"                         : "true",
+	\ "BreakBeforeBraces"                         : "Custom",
+	\ "BraceWrapping" : {
+		\ "AfterClass"            : "false",
+		\ "AfterControlStatement" : "true",
+		\ "AfterEnum"             : "true",
+		\ "AfterFunction"         : "true",
+		\ "AfterNamespace"        : "true",
+		\ "AfterObjCDeclaration"  : "true",
+		\ "AfterStruct"           : "true",
+		\ "AfterUnion"            : "true",
+		\ "AfterExternBlock"      : "true",
+		\ "BeforeCatch"           : "true",
+		\ "BeforeElse"            : "true",
+		\ "IndentBraces"          : "false",
+		\ "SplitEmptyFunction"    : "true",
+		\ "SplitEmptyRecord"      : "true",
+		\ "SplitEmptyNamespace"   : "true"},
+	\ "BreakBeforeBinaryOperators"                     : "false",
+	\ "BreakBeforeTernaryOperators"                    : "true",
+	\ "BreakConstructorInitializers"                   : "AfterColon",
+	\ "BreakStringLiterals"                            : "false",
+	\ "ColumnLimit"                                    : "0",
+	\ "CompactNamespaces"                              : "false",
+	\ "ConstructorInitializerAllOnOneLineOrOnePerLine" : "false",
+	\ "ConstructorInitializerIndentWidth"              : "8",
+	\ "ContinuationIndentWidth"                        : "4",
+	\ "Cpp11BracedListStyle"                           : "true",
+	\ "DerivePointerAlignment"                         : "true",
+	\ "FixNamespaceComments"                           : "false",
+	\ "IncludeBlocks"                                  : "Regroup",
+	\ "IndentCaseLabels"                               : "true",
+	\ "IndentPPDirectives"                             : "AfterHash",
+	\ "IndentWidth"                                    : "8",
+	\ "IndentWrappedFunctionNames"                     : "true",
+	\ "KeepEmptyLinesAtTheStartOfBlocks"               : "false",
+	\ "MaxEmptyLinesToKeep"                            : "2",
+	\ "NamespaceIndentation"                           : "All",
+	\ "PointerAlignment"                               : "Right",
+	\ "ReflowComments"                                 : "false",
+	\ "SortIncludes"                                   : "true",
+	\ "SortUsingDeclarations"                          : "true",
+	\ "SpaceAfterCStyleCast"                           : "false",
+	\ "SpaceAfterTemplateKeyword"                      : "false",
+	\ "SpaceBeforeAssignmentOperators"                 : "true",
+	\ "SpaceBeforeParens"                              : "true",
+	\ "SpaceInEmptyParentheses"                        : "true",
+	\ "SpacesInAngles"                                 : "false",
+	\ "SpacesInCStyleCastParentheses"                  : "false",
+	\ "SpacesInContainerLiterals"                      : "false",
+	\ "SpacesInParentheses"                            : "false",
+	\ "SpacesInSquareBrackets"                         : "false",
+	\ "TabWidth"                                       : "8",
+	\ "UseTab"                                         : "Always",
+	\ "Standard"                                       : "C++11"}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" global functions and commands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ip1 = 0				" step1: let g:ip=xxx, step2: %s/yyy/\=Iplus1/gc
+if !exists("*Iplus1")
+function Iplus1()
+	let ip1=g:ip1
+	let g:ip1 = g:ip1+1
+	return ip1
+endfunction
+endif
+if !exists("*Repplus1")
+function Repplus1(arg1, arg2)
+	let g:ip1 = a:arg1
+	let @/ = a:arg2
+endfunction
+endif
+if !exists("*Repplus2_getarg2")
+function Repplus2_getarg2()
+	return g:repplus2_arg2
+endfunction
+endif
+if !exists("*Repplus2")
+function Repplus2(arg1, arg2)
+	let @/ = a:arg1
+	let g:repplus2_arg2 = a:arg2
+endfunction
+endif
+
+if !exists(":Myrep1")
+command -nargs=+  Myrep1  :call Repplus1(<f-args>)| :%s//\=Iplus1()/gc
+endif
+if !exists(":Myrep2")
+command -nargs=+  Myrep2  :call Repplus2(<f-args>)| :.,$s//\=Repplus2_getarg2()/gc
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" global key maps
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-Left>               gT
+map <C-Right>              gt
+map <C-w><C-h>             gT
+map <C-w><C-l>             gt
+nore <C-w>-             <Esc>:split<CR>
+nore <C-w><Bar>         <Esc>:vsplit<CR>
+nore <C-n>              <Esc>o<Esc>
+nore <Leader>vimrc      <Esc>:tabnew $VIM/_vimrc<CR>
+nore <Leader>it         <Esc>i<Tab><Esc>
+" za		toggle fold
+" zM		close all fold
+" zR		open all fold
 
