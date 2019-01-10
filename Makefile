@@ -1,39 +1,76 @@
 
+CURR_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
+CURR_DIR := $(shell dirname $(CURR_PATH))
 
+GITRC := $(wildcard ~/.gitconfig)
+VIMRC := $(wildcard ~/.vimrc)
+ZSHRC := $(wildcard ~/.zshrc)
+TMUXRC := $(wildcard ~/.tmux.conf)
 
 all:exports gitconfig init_setup minicom monps rm_guest sudoers tftp vimrc zsh
 
+test:
+ifeq ($(VIMRC), )
+	@echo yes
+else
+	@echo no
+endif
+
+help:
+	@echo curr dir is:
+	@echo $(CURR_DIR)
+
 #####################################################################
 # dotfiles
-gitconfig:
-	rm -f ~/.gitconfig
-	ln -s ~/steel/working/repos/lgconfig/dotfiles/gitconfig ~/.gitconfig
-	echo **** created link file ~/.gitconfig
 
 minicom:
 	rm -f ~/.minirc.dfl
 	ln -s ~/steel/working/repos/lgconfig/dotfiles/minirc.dfl ~/.minirc.dfl
 	echo **** created link file ~/.minirc.dfl
 
+
+#######################################
+gitconfig:
+ifneq ($(GITRC), )
+	mv $(GITRC)  $(GITRC)_bak
+endif
+	ln -s $(CURR_DIR)/dotfiles/gitconfig ~/.gitconfig
+	echo **** created link file ~/.gitconfig
+
+
+#######################################
 tmux:
-	rm -f ~/.tmux.conf
-	ln -s ~/steel/working/repos/lgconfig/dotfiles/tmux.conf ~/.tmux.conf
-	#git clone https://github.com/tmuxinator/tmuxinator.git ~/steel/working/repos/tmuxinator
+ifneq ($(TMUXRC), )
+	mv $(TMUXRC)  $(TMUXRC)_bak
+endif
+	ln -s $(CURR_DIR)/dotfiles/tmux.conf ~/.tmux.conf
+	sudo apt-get install ruby
 	sudo apt-get install rubygems-integration
 	sudo gem install tmuxinator
 	echo **** install tmuxinator and create link file ~/.tmux.conf
+	#git clone https://github.com/tmuxinator/tmuxinator.git ~/steel/working/repos/tmuxinator
 
+
+#######################################
 vim:
-	rm -f ~/.vimrc
-	ln -s ~/working/repos/lgconfig/dotfiles/vimrc ~/.vimrc
+ifneq ($(VIMRC), )
+	mv $(VIMRC)  $(VIMRC)_bak
+endif
+	ln -s $(CURR_DIR)/dotfiles/vimrc ~/.vimrc
 	echo **** created link file ~/.vimrc
 
+
+#######################################
 zsh:
-	rm -f ~/.zshrc
-	ln -s ~/steel/working/repos/lgconfig/dotfiles/zshrc ~/.zshrc
+ifneq ($(ZSHRC), )
+	mv $(ZSHRC)  $(ZSHRC)_bak
+endif
+	ln -s $(CURR_DIR)/dotfiles/zshrc ~/.zshrc
 	git clone https://github.com/rimraf/k.git ~/.oh-my-zsh/plugins/k
 	echo **** created link file ~/.zshrc
 
+
+#######################################
 ssh:
 	rm -rf ~/.ssh
 	ln -s ~/working/repos/lgconfig/dotfiles/ssh ~/.ssh

@@ -58,8 +58,8 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 export REPOS=http://172.24.105.209/repos
 export EDITOR='vim'
-export NFS_BOOT=~/steel/working/tbea/buildroot/output/rootfs/boot/
-source ~/steel/working/repos/tmuxinator/completion/tmuxinator.zsh
+#export NFS_BOOT=~/steel/working/tbea/buildroot/output/rootfs/boot/
+#source ~/steel/working/repos/tmuxinator/completion/tmuxinator.zsh
 source ~/.oh-my-zsh/plugins/k/k.sh
 
 # Preferred editor for local and remote sessions
