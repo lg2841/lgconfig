@@ -6,16 +6,18 @@
 ###############################################################################
 ## environment set up
 # process name which is going to be monitored
-psname=gedit
+export PATH=$PATH:~/root
+psname=dfti_srv
 
 # monitor frequency
-interval=1
+interval=2
+max=1
 
 # log file to record restart history
 logfile=~/monps.log
 
 # enable(1) or disable(0) debug
-debug=1
+debug=0
 
 echo "" $logfile
 echo "*************************************************" >> $logfile
@@ -42,6 +44,12 @@ do
 			echo process not found, restarting...
 		fi
 
+		if [ $max -ge 10 ]
+		then
+			exit
+		fi
+
+		let "max+=1"
 		$psname &
 		date >> $logfile
 	fi
