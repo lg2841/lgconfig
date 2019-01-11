@@ -76,6 +76,7 @@ ssh:
 ifneq ($(SSHRC), )
 	mv $(SSHRC)  $(SSHRC)_bak
 endif
+	chmod 600 $(CURR_DIR)/dotfiles/ssh/id_rsa
 	ln -s $(CURR_DIR)/dotfiles/ssh ~/.ssh
 	@echo **** created link file ~/.ssh
 
